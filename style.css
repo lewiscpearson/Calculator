@@ -1,0 +1,21 @@
+th {
+    border: 5px solid black;
+    width:100px;
+    height:80px;
+    font-size: 14px;
+    font-family: Roboto, sans-serif;
+}
+
+.calculator {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    min-height: 100vh;
+    align-content: center;
+    
+}
+
+.display {
+    border: 5px solid black;
+    width: 100%;
+}
