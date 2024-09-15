@@ -4,42 +4,57 @@ function addition(n1, n2) {
 }
 
 function subtraction (n1, n2) {
-    return n1-n1;
+    return n1 - n2;
 };
 
 function multiply (n1, n2) {
-    return n1*n2;
+    return n1 * n2;
 }
 
 function divide (n1, n2) {
-    return n1/n2;
+    return n1 / n2;
 }
 
+//initialise calculator variables
+
 let num1 = null;
-let num2 =null;
-let operator;
+let num2 = null;
+let operator = null;
+
+//the actual calculate function
 
 function operate(num1, num2, operator) {
+    let result;
     switch(operator) {
         case "+":
-            addition(num1, num2);
+            result = addition(num1, num2);
             break;
         case "-":
-            subtraction(num1, num2);
+            result = subtraction(num1, num2);
             break;
         case "*":
-            multiply(num1, num2);
+            result =  multiply(num1, num2);
             break;
         case "/":
-            divide(num1, num2);
+            result = divide(num1, num2);
             break;
         default:
             alert("error");
+            result = "Error";
     } 
+    display.textContent = result;
+    num1 = result;
+    num2 = null;
+    operator = null;
 }
 
+//getting inputs from the buttons, and the display box
+
 const buttons = document.querySelectorAll("button");
-const display = document.querySelector(".display");
+const display = document.querySelector("#display")
+
+
+//calculator logic
 
 buttons.forEach(button => {
     const buttonId = button.id;
@@ -47,26 +62,32 @@ buttons.forEach(button => {
 
     button.onclick = function() {
         if (buttonText === "="){
-            operate(num1, num2, operator);
-            clearAll();
+            if ((num1 !== null) && (num2 !== null) && (operator !== null)) {
+
+                operate(parseFloat(num1), parseFloat(num2), operator);
+            } else {
+                alert("Incomplete expression");
+            }
+
         } else if (buttonText ==="CE") {
             clearAll();
         } else if (buttonId === "num"){
-            if ((operator === null) && (num1 === null)) {
-                num1 += "" + buttonText;
-            } else if ((num1 !== null) && (operator !== null)) {
-                num2 += "" + buttonText;
+            if (operator === null) {
+                num1 = (num1 || "") + buttonText;
+                display.textContent = num1;
+            } else {
+                num2 = (num2 || "") + buttonText;
+                display.textContent = num2;
             }
 
-        } else if (buttonId == "operator") {
-            if (num1==null) {
-                num1 = buttonText;
-            } else if (num2==null) {
-                num2 = buttonText;
-            }
+        } else if (buttonId === "operator") {
+            operator = buttonText;
+            display.textContent = "";
+        } else {
+            alert("invalid operator placement");
         }
 
-        display.textContent += buttonText;
+        
     }
 });
 
