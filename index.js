@@ -15,8 +15,8 @@ function divide (n1, n2) {
     return n1/n2;
 }
 
-let num1;
-let num2;
+let num1 = null;
+let num2 =null;
 let operator;
 
 function operate(num1, num2, operator) {
@@ -42,8 +42,38 @@ const buttons = document.querySelectorAll("button");
 const display = document.querySelector(".display");
 
 buttons.forEach(button => {
+    const buttonId = button.id;
+    const buttonText = button.textContent;
+
     button.onclick = function() {
-        display.textContent += button.textContent;
+        if (buttonText === "="){
+            operate(num1, num2, operator);
+            clearAll();
+        } else if (buttonText ==="CE") {
+            clearAll();
+        } else if (buttonId === "num"){
+            if ((operator === null) && (num1 === null)) {
+                num1 += "" + buttonText;
+            } else if ((num1 !== null) && (operator !== null)) {
+                num2 += "" + buttonText;
+            }
+
+        } else if (buttonId == "operator") {
+            if (num1==null) {
+                num1 = buttonText;
+            } else if (num2==null) {
+                num2 = buttonText;
+            }
+        }
+
+        display.textContent += buttonText;
     }
 });
+
+function clearAll(){
+    display.textContent = "";
+    num1 = null;
+    num2 = null;
+    operator = null;
+}
 
