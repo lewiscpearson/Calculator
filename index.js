@@ -24,7 +24,7 @@ function divide (n1, n2) {
 //getting inputs from the buttons, and the display box
 
 const buttons = document.querySelectorAll("button");
-const display = document.querySelector("#display")
+const display = document.querySelector(".display")
 
 let num1 = null;
 let num2 = null;
@@ -57,16 +57,13 @@ function operate(num1, num2, operator) {
     operator = null;
 }
 
-
-
-
 //calculator logic
 
 buttons.forEach(button => {
-    const buttonClass = button.class;
+    const buttonClass = button.className;
     const buttonId = button.id;
-    const buttonValue = button.value;
-    const buttonText = button.textContent;
+    const buttonValue = button.getAttribute('value');
+    console.log("Button Class: ", buttonClass, " button ID: " , buttonId, " button value: " , buttonValue, " ")
 
     console.log("num1:", num1, "num2:", num2);
 
@@ -94,10 +91,10 @@ buttons.forEach(button => {
                 display.textContent = num2;
             }
 
-        } else if (buttonId === "operator") {
+        } else if (buttonClass === "operator") {
             if (num1 !== null && num2 === null) {
                 operator = buttonValue;
-                display.textContent = "";
+                display.textContent += operator;
             } else {
                 alert("Invalid operator placement");
             }
