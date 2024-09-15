@@ -37,3 +37,13 @@ function operate(num1, num2, operator) {
             alert("error");
     } 
 }
+
+const buttons = document.querySelectorAll("button");
+const display = document.querySelector(".display");
+
+buttons.forEach(button => {
+    button.onclick = function() {
+        display.textContent += button.textContent;
+    }
+});
+
