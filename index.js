@@ -12,10 +12,19 @@ function multiply (n1, n2) {
 }
 
 function divide (n1, n2) {
+    if (n2 === 0) {
+        alert("Cannot divide by zero")
+        return "Error";
+    }
     return n1 / n2;
 }
 
 //initialise calculator variables
+
+//getting inputs from the buttons, and the display box
+
+const buttons = document.querySelectorAll("button");
+const display = document.querySelector("#display")
 
 let num1 = null;
 let num2 = null;
@@ -48,20 +57,22 @@ function operate(num1, num2, operator) {
     operator = null;
 }
 
-//getting inputs from the buttons, and the display box
 
-const buttons = document.querySelectorAll("button");
-const display = document.querySelector("#display")
 
 
 //calculator logic
 
 buttons.forEach(button => {
+    const buttonClass = button.class;
     const buttonId = button.id;
+    const buttonValue = button.value;
     const buttonText = button.textContent;
 
+    console.log("num1:", num1, "num2:", num2);
+
+
     button.onclick = function() {
-        if (buttonText === "="){
+        if (buttonValue === "="){
             if ((num1 !== null) && (num2 !== null) && (operator !== null)) {
 
                 operate(parseFloat(num1), parseFloat(num2), operator);
@@ -69,24 +80,28 @@ buttons.forEach(button => {
                 alert("Incomplete expression");
             }
 
-        } else if (buttonText ==="CE") {
+        } else if (buttonId === "clear") {
             clearAll();
-        } else if (buttonId === "num"){
+        } else if (buttonClass === "num"){
             if (operator === null) {
-                num1 = (num1 || "") + buttonText;
+                console.log("num1:", num1, "num2:", num2);
+
+                num1 = (num1 || "") + buttonValue;
                 display.textContent = num1;
+                
             } else {
-                num2 = (num2 || "") + buttonText;
+                num2 = (num2 || "") + buttonValue;
                 display.textContent = num2;
             }
 
         } else if (buttonId === "operator") {
-            operator = buttonText;
-            display.textContent = "";
-        } else {
-            alert("invalid operator placement");
+            if (num1 !== null && num2 === null) {
+                operator = buttonValue;
+                display.textContent = "";
+            } else {
+                alert("Invalid operator placement");
+            }
         }
-
         
     }
 });
