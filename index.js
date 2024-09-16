@@ -52,9 +52,7 @@ function operate(num1, num2, operator) {
             result = "Error";
     } 
     display.textContent = result;
-    num1 = result;
-    num2 = null;
-    operator = null;
+    return result;
 }
 
 //calculator logic
@@ -68,7 +66,9 @@ buttons.forEach(button => {
         if (buttonValue === "="){
             if ((num1 !== null) && (num2 !== null) && (operator !== null)) {
 
-                operate(parseFloat(num1), parseFloat(num2), operator);
+                num1 = operate(parseFloat(num1), parseFloat(num2), operator);
+                num2 =null;
+                operator = null;
             } else {
                 alert("Incomplete expression");
             }
@@ -88,6 +88,7 @@ buttons.forEach(button => {
             }
 
         } else if (buttonClass === "operator") {
+            console.log(num1, num2, operator)
             if (num1 !== null && num2 === null) {
                 operator = buttonValue;
                 display.textContent += operator;
