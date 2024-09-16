@@ -40,3 +40,19 @@ button {
 #row {
     width: 100%;
 }
+
+.operator {
+    background-color: rgba(71, 67, 67, 0.575);
+}
+
+#clear {
+    background-color: rgb(197, 1, 1);
+}
+
+#equals {
+    background-color: rgb(13, 184, 78);
+}
+
+.num {
+    background-color: rgb(218, 220, 221);
+}

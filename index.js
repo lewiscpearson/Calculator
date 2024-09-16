@@ -63,10 +63,6 @@ buttons.forEach(button => {
     const buttonClass = button.className;
     const buttonId = button.id;
     const buttonValue = button.getAttribute('value');
-    console.log("Button Class: ", buttonClass, " button ID: " , buttonId, " button value: " , buttonValue, " ")
-
-    console.log("num1:", num1, "num2:", num2);
-
 
     button.onclick = function() {
         if (buttonValue === "="){
@@ -88,7 +84,7 @@ buttons.forEach(button => {
                 
             } else {
                 num2 = (num2 || "") + buttonValue;
-                display.textContent = num2;
+                display.textContent += num2;
             }
 
         } else if (buttonClass === "operator") {
